@@ -15,6 +15,10 @@
 </head>
 
 <body>
+  <audio id="bg-music" src="assets/audio/loml.mp3" loop preload="auto"></audio>
+  <button class="music-toggle" id="music-toggle" type="button" aria-label="Play music" hidden>
+    <span class="music-toggle__icon" aria-hidden="true"></span>
+  </button>
   <main class="hero">
     <div class="grain" aria-hidden="true"></div>
     <section class="reveal-page" aria-label="Wedding invitation">
@@ -23,10 +27,9 @@
       <div class="chandelier" aria-hidden="true">
         <img src="assets/chandelier.png" alt="">
       </div>
-      <div class="couple-photo" aria-hidden="true">
+      <div class="couple-photo">
         <span class="couple-photo__frame">
-          <i></i>
-          <small>Couple's photo</small>
+          <img src="assets/pre-wedding/pw-04-golden-hour.jpg" alt="Olayemi and Emmanuel">
         </span>
       </div>
       <div class="invitation-copy">
@@ -52,38 +55,134 @@
         </p>
         <p>We truly hope that on this day<br>the people dearest to us will be right there with us!</p>
       </section>
-      <section class="calendar-section" id="calendar-section">
-        <img class="calendar-flowers" src="assets/calendar-flowers.png" alt="" aria-hidden="true">
-        <!-- <span class="calendar-section__eyebrow">Save the date</span> -->
-        <h2>August</h2>
-        <div class="calendar" aria-label="August 2026 calendar">
-          <div class="calendar__week">
-            <span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span><span>Su</span>
+      <section class="date-location-section" id="date-location-section">
+        <span class="date-location-section__eyebrow">Save the Date &amp; Find Us</span>
+        <div class="calendar-section" id="calendar-section">
+          <img class="calendar-flowers" src="assets/calendar-flowers.png" alt="" aria-hidden="true">
+          <!-- <span class="calendar-section__eyebrow">Save the date</span> -->
+          <h2>August</h2>
+          <div class="calendar" aria-label="August 2026 calendar">
+            <div class="calendar__week">
+              <span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span><span>Su</span>
+            </div>
+            <div class="calendar__days">
+              <i></i><i></i><i></i><i></i><i></i><span>1</span><span>2</span>
+              <span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span>
+              <span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span
+                class="wedding-day">15</span><span>16</span>
+              <span>17</span><span>18</span><span>19</span><span>20</span><span>21</span><span>22</span><span>23</span>
+              <span>24</span><span>25</span><span>26</span><span>27</span><span>28</span><span>29</span><span>30</span>
+              <span>31</span>
+              <svg class="calendar-heart" viewBox="0 0 64 58" aria-hidden="true">
+                <path pathLength="1" d="M32 53C27 47 8 35 8 20C8 10 14 5 22 5C27 5 30 8 32 12C34 8 37 5 42 5C50 5 56 10 56 20C56 35 37 47 32 53Z"></path>
+              </svg>
+            </div>
           </div>
-          <div class="calendar__days">
-            <i></i><i></i><i></i><i></i><i></i><span>1</span><span>2</span>
-            <span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span>
-            <span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span
-              class="wedding-day">15</span><span>16</span>
-            <span>17</span><span>18</span><span>19</span><span>20</span><span>21</span><span>22</span><span>23</span>
-            <span>24</span><span>25</span><span>26</span><span>27</span><span>28</span><span>29</span><span>30</span>
-            <span>31</span>
-            <svg class="calendar-heart" viewBox="0 0 64 58" aria-hidden="true">
-              <path pathLength="1" d="M32 53C27 47 8 35 8 20C8 10 14 5 22 5C27 5 30 8 32 12C34 8 37 5 42 5C50 5 56 10 56 20C56 35 37 47 32 53Z"></path>
-            </svg>
+          <button class="save-date" type="button"><b>＋</b> Add to calendar</button>
+          <!-- <small>15 August 2026 · all day</small> -->
+        </div>
+        <div class="location-section" id="location-section" aria-labelledby="location-title">
+          <div class="location-card">
+            <span class="location-card__eyebrow">Venue</span>
+            <h2 id="location-title">Location</h2>
+            <span class="location-pin" aria-hidden="true"><i></i></span>
+            <p>Our wedding will take place at</p>
+            <address>ERKC Zhukovka</address>
+            <figure class="location-photo">
+              <img src="assets/zhukovka-location.png" alt="ERKC Zhukovka nestled in a pine forest">
+              <a href="https://yandex.ru/maps/?text=%D0%95%D0%A0%D0%9A%D0%A6%20%D0%96%D1%83%D0%BA%D0%BE%D0%B2%D0%BA%D0%B0"
+                target="_blank" rel="noopener noreferrer" aria-label="Open ERKC Zhukovka in Yandex Maps">
+                <i aria-hidden="true"></i>
+                <span>Open in Yandex Maps</span>
+              </a>
+            </figure>
           </div>
         </div>
-        <button class="save-date" type="button"><b>＋</b> Add to calendar</button>
-        <!-- <small>15 August 2026 · all day</small> -->
+      </section>
+      <section class="dress-code-section" id="dress-code-section" aria-labelledby="dress-code-title">
+        <div class="dress-code__card">
+          <span class="dress-code__eyebrow">Celebration style</span>
+          <h2 id="dress-code-title">Colors of the Day</h2>
+          <span class="dress-code__divider" aria-hidden="true"></span>
+          <p>We'd love to see you in elegant evening attire that complements our celebration's color palette.</p>
+          <div class="dress-code__palette" aria-label="Celebration color palette">
+            <i style="--swatch:#f6c9a8" title="Peach"></i>
+            <i style="--swatch:#f3c2c2" title="Blush Pink"></i>
+            <i style="--swatch:#0f6e51" title="Emerald Green"></i>
+          </div>
+          <small>Evening attire · Peach, Blush Pink &amp; Emerald Green</small>
+        </div>
+        <span class="dress-code__fabric dress-code__fabric--left" aria-hidden="true"></span>
+        <span class="dress-code__fabric dress-code__fabric--right" aria-hidden="true"></span>
+      </section>
+      <section class="love-story-section" id="love-story-section" aria-labelledby="love-story-title">
+        <span class="love-story-section__eyebrow">Our Story</span>
+        <h2 id="love-story-title">Our Love Story</h2>
+        <div class="love-story-topic">
+          <h3 class="love-story-topic__title">How Did You Meet?</h3>
+          <div class="love-story-tabs" role="tablist" aria-label="How did you meet — perspectives">
+            <button type="button" class="love-story-tab is-active" role="tab" aria-selected="true" aria-controls="pov-his" id="tab-his">His P.O.V</button>
+            <button type="button" class="love-story-tab" role="tab" aria-selected="false" aria-controls="pov-her" id="tab-her">Her P.O.V</button>
+          </div>
+          <div class="love-story-panel is-active" id="pov-his" role="tabpanel" aria-labelledby="tab-his">
+            <p>I'd honestly say our meeting was divinely orchestrated.</p>
+            <p>Before we met, my phone was stolen in a taxi. At the time, it felt like one of those frustrating moments you wish never happened. Looking back now, I believe God was simply putting the right pieces in place.</p>
+            <p>While trying to replace my sim, I ended up at an MTN office. That's where I first saw her. She walked past me, and I immediately noticed how beautiful and graceful she was. I secretly hoped she'd be the customer service representative assigned to me, and she was.</p>
+            <p>We talked, laughed, and for one of the very few times in my life, I asked a woman for her number. She said yes.</p>
+            <p>From that day, we spoke every single day. Through work, long late-night conversations, and every season of life, we kept choosing each other. When we finally had our first date — a simple picnic in the park — I knew she was the woman I wanted to spend forever with.</p>
+            <p>Looking back now, every detour, every challenge, and even a stolen phone led me to her. I truly believe God wrote our story long before we met.</p>
+          </div>
+          <div class="love-story-panel" id="pov-her" role="tabpanel" aria-labelledby="tab-her" hidden>
+            <p>We met at my workplace, he had come in to retrieve his missing SIM card, and I honestly didn't notice him when he first walked in. It wasn't until I called out, "Next customer, please!" and he was referred to my desk that I finally looked up.</p>
+            <p>And there he was... looking all clean and handsome, with skin as smooth as milk. 😄 I had to quickly compose myself and switch back into professional mode.</p>
+            <p>Then something unexpected happened—the network at the office went down. What should have been a quick customer interaction suddenly turned into an unplanned conversation. We talked, laughed, and got to know each other while waiting for the system to come back on.</p>
+            <p>Before he left, he asked for my number, saying it was "just in case" his SIM card didn't work. Well... I guess the SIM card worked.</p>
+            <p>From that day on, we spoke every single day. One conversation became many, friendship grew into something beautiful, and before we knew it, we had found our forever.</p>
+            <p>Looking back now, I can confidently say it was divinely designed. What looked like an ordinary workday, a missing SIM card, and even a network outage were all pieces of God's perfect plan. He orchestrated every detail so our paths would cross at exactly the right time. The rest, as they say, is history... and now we're writing our happily ever after. ❤️</p>
+          </div>
+        </div>
+        <div class="love-story-topic">
+          <h3 class="love-story-topic__title">Who said "I love you" first?</h3>
+          <div class="love-story-tabs" role="tablist" aria-label="Who said I love you first — perspectives">
+            <button type="button" class="love-story-tab is-active" role="tab" aria-selected="true" aria-controls="pov-his-2" id="tab-his-2">His P.O.V</button>
+            <button type="button" class="love-story-tab" role="tab" aria-selected="false" aria-controls="pov-her-2" id="tab-her-2">Her P.O.V</button>
+          </div>
+          <div class="love-story-panel is-active" id="pov-his-2" role="tabpanel" aria-labelledby="tab-his-2">
+            <p>I did.</p>
+            <p>I've never really been the "I love you first" type. I've always been someone who led more with my head than my heart.</p>
+            <p>But she changed that. Her kindness, her sincerity, and the way she made me feel completely safe broke down every wall I had built. Loving her became the easiest and most natural thing in the world, and saying "I love you" first felt like the only right thing to do.</p>
+          </div>
+          <div class="love-story-panel" id="pov-her-2" role="tabpanel" aria-labelledby="tab-her-2" hidden>
+            <p>He did.</p>
+          </div>
+        </div>
+        <div class="love-story-topic">
+          <h3 class="love-story-topic__title">Mention two things that made you fall more in love</h3>
+          <div class="love-story-tabs" role="tablist" aria-label="Two things that made you fall more in love — perspectives">
+            <button type="button" class="love-story-tab is-active" role="tab" aria-selected="true" aria-controls="pov-his-3" id="tab-his-3">His P.O.V</button>
+            <button type="button" class="love-story-tab" role="tab" aria-selected="false" aria-controls="pov-her-3" id="tab-her-3">Her P.O.V</button>
+          </div>
+          <div class="love-story-panel is-active" id="pov-his-3" role="tabpanel" aria-labelledby="tab-his-3">
+            <p>First, her nurturing heart.</p>
+            <p>She naturally takes care of people. Whether it's family, friends, or me, she's always asking if everyone is okay, making sure everyone feels loved and cared for. She brings warmth wherever she goes, and it's one of the qualities I admire most about her.</p>
+            <p>Second, her mind.</p>
+            <p>I'm not just in love with her beauty — I'm deeply in love with the way she thinks. She's incredibly intelligent, wise beyond her years, and always gives thoughtful advice. Watching her grow, excel at work, and solve problems with so much wisdom makes me admire her even more every day.</p>
+            <p>She has a beautiful heart, a beautiful mind, and yes... the most beautiful smile and body too. But it's the person she is on the inside that makes me fall more in love with her every single day.</p>
+          </div>
+          <div class="love-story-panel" id="pov-her-3" role="tabpanel" aria-labelledby="tab-her-3" hidden>
+            <p>One of the things I admire most about him is how consistent he is. From the very beginning, he has been intentional, dependable, and true to his word, and that gives me so much peace. He's also incredibly soft-spoken, which is so calming. He has this beautiful way of anticipating my needs before I even express them. Whether it's checking in on me after a long day, remembering the little things that matter to me, or doing thoughtful acts of kindness without being asked, he constantly makes me feel seen. I genuinely love the way he loves me, he's patient, selfless, intentional, and reassuring.</p>
+            <p>Another thing that makes me fall even more in love with him is his kind and caring heart. He has one of the most genuine hearts I've ever known. He loves with so much sincerity and makes it so easy to feel safe with him. He celebrates my wins as though they were his own, stands by me through every challenge, and never fails to remind me that I'm not alone. With him, I feel deeply loved, valued, respected, and supported every single day. His love isn't just something he says, it's something he lives out consistently through his words, his actions, and the way he chooses me every single day.</p>
+          </div>
+        </div>
       </section>
       <section class="gallery-section" id="gallery-section" aria-labelledby="gallery-title">
         <span class="gallery-section__eyebrow">15 August 2026</span>
         <h2 id="gallery-title">Our Gallery</h2>
         <p class="gallery-section__intro">A glimpse into our story — tap a cover to open the album.</p>
         <div class="gallery-grid">
-          <a class="gallery-card" href="#gallery-love-journey">
+          <a class="gallery-card" href="#gallery-love-journey" data-gallery-open="gallery-love-journey">
             <span class="gallery-card__frame">
-              <img src="assets/floral-watercolor.png" alt="" aria-hidden="true">
+              <img src="assets/love-journey/lj-01-formal-event.jpg" alt="" aria-hidden="true">
               <span class="gallery-card__overlay"></span>
               <span class="gallery-card__icon" aria-hidden="true"></span>
             </span>
@@ -92,9 +191,9 @@
               <small>View album</small>
             </span>
           </a>
-          <a class="gallery-card" href="#gallery-pre-wedding">
+          <a class="gallery-card" href="#gallery-pre-wedding" data-gallery-open="gallery-pre-wedding">
             <span class="gallery-card__frame">
-              <img src="assets/floral-peonies.png" alt="" aria-hidden="true">
+              <img src="assets/pre-wedding/pw-08-sweet-nothings.jpg" alt="" aria-hidden="true">
               <span class="gallery-card__overlay"></span>
               <span class="gallery-card__icon" aria-hidden="true"></span>
             </span>
@@ -103,84 +202,142 @@
               <small>View album</small>
             </span>
           </a>
+          <a class="gallery-card" href="#gallery-proposal" data-gallery-open="gallery-proposal">
+            <span class="gallery-card__frame">
+              <img src="assets/heart-seal-3d.png" alt="" aria-hidden="true">
+              <span class="gallery-card__overlay"></span>
+              <span class="gallery-card__icon" aria-hidden="true"></span>
+            </span>
+            <span class="gallery-card__label">
+              <b>Proposal</b>
+              <small>View album</small>
+            </span>
+          </a>
         </div>
       </section>
       <section class="gallery-page" id="gallery-love-journey" aria-labelledby="gallery-love-journey-title">
-        <a class="gallery-page__back" href="#gallery-section">&larr; Back to gallery</a>
+        <button type="button" class="gallery-page__back" data-gallery-close>&larr; Back to gallery</button>
         <span class="gallery-page__eyebrow">Our Gallery</span>
         <h2 id="gallery-love-journey-title">Love Journey</h2>
-        <p class="gallery-page__intro">Photos from our journey together will appear here soon.</p>
+        <p class="gallery-page__intro">A few favorite moments from our journey together.</p>
         <div class="gallery-page__grid">
-          <span class="gallery-placeholder" aria-hidden="true"><i></i></span>
-          <span class="gallery-placeholder" aria-hidden="true"><i></i></span>
-          <span class="gallery-placeholder" aria-hidden="true"><i></i></span>
-          <span class="gallery-placeholder" aria-hidden="true"><i></i></span>
-          <span class="gallery-placeholder" aria-hidden="true"><i></i></span>
-          <span class="gallery-placeholder" aria-hidden="true"><i></i></span>
+          <figure class="gallery-photo">
+            <img src="assets/love-journey/lj-07-picnic-bw.jpg" alt="Olayemi and Emmanuel sitting together outdoors">
+            <figcaption>First Date</figcaption>
+          </figure>
+          <figure class="gallery-photo">
+            <img src="assets/love-journey/lj-07-picnic-bw.jpg" alt="Olayemi and Emmanuel sitting together outdoors">
+            <figcaption>Her P.O.V</figcaption>
+          </figure>
+          <figure class="gallery-photo">
+            <img src="assets/love-journey/lj-08-picnic-color.jpg" alt="Olayemi smiling on a picnic blanket">
+            <figcaption>His P.O.V</figcaption>
+          </figure>
+          <figure class="gallery-photo">
+            <img src="assets/love-journey/lj-02-road-trip.jpg" alt="Olayemi and Emmanuel taking a selfie in the car">
+            <figcaption>Road Trip</figcaption>
+          </figure>
+          <figure class="gallery-photo">
+            <img src="assets/love-journey/lj-03-road-trip-close.jpg" alt="Olayemi and Emmanuel making playful faces in the car">
+            <figcaption>Just Us</figcaption>
+          </figure>
+          <figure class="gallery-photo">
+            <img src="assets/love-journey/lj-04-indoor.jpg" alt="Olayemi and Emmanuel posing close together indoors">
+            <figcaption>Out on a Date</figcaption>
+          </figure>
+          <figure class="gallery-photo">
+            <img src="assets/love-journey/lj-05-indoor-smiling.jpg" alt="Olayemi and Emmanuel smiling together indoors">
+            <figcaption>Each Other's Happy Place</figcaption>
+          </figure>
+          <figure class="gallery-photo">
+            <img src="assets/love-journey/lj-01-formal-event.jpg" alt="Olayemi and Emmanuel dressed up together at an event">
+            <figcaption>First Owambe Together</figcaption>
+          </figure>
         </div>
       </section>
       <section class="gallery-page" id="gallery-pre-wedding" aria-labelledby="gallery-pre-wedding-title">
-        <a class="gallery-page__back" href="#gallery-section">&larr; Back to gallery</a>
+        <button type="button" class="gallery-page__back" data-gallery-close>&larr; Back to gallery</button>
         <span class="gallery-page__eyebrow">Our Gallery</span>
         <h2 id="gallery-pre-wedding-title">Pre-Wedding</h2>
-        <p class="gallery-page__intro">Our pre-wedding photos will appear here soon.</p>
+        <p class="gallery-page__intro">A few favorite moments from our pre-wedding shoot.</p>
         <div class="gallery-page__grid">
-          <span class="gallery-placeholder" aria-hidden="true"><i></i></span>
-          <span class="gallery-placeholder" aria-hidden="true"><i></i></span>
-          <span class="gallery-placeholder" aria-hidden="true"><i></i></span>
-          <span class="gallery-placeholder" aria-hidden="true"><i></i></span>
-          <span class="gallery-placeholder" aria-hidden="true"><i></i></span>
-          <span class="gallery-placeholder" aria-hidden="true"><i></i></span>
+          <figure class="gallery-photo">
+            <img src="assets/pre-wedding/pw-02-traditional-elegance.jpg" alt="Olayemi and Emmanuel in traditional Ankara attire, gazing at each other">
+            <figcaption>Traditional Elegance</figcaption>
+          </figure>
+          <figure class="gallery-photo">
+            <img src="assets/pre-wedding/pw-08-sweet-nothings.jpg" alt="Emmanuel kissing Olayemi's cheek in traditional attire, seated on a stool">
+            <figcaption>Sweet Nothings</figcaption>
+          </figure>
+          <figure class="gallery-photo">
+            <img src="assets/pre-wedding/pw-01-candid-laughter.jpg" alt="Olayemi laughing as Emmanuel embraces her from behind">
+            <figcaption>Laughter Together</figcaption>
+          </figure>
+          <figure class="gallery-photo">
+            <img src="assets/pre-wedding/pw-03-dressed-up.jpg" alt="Olayemi and Emmanuel standing close together in black outfits">
+            <figcaption>Standing Together</figcaption>
+          </figure>
+          <figure class="gallery-photo">
+            <img src="assets/pre-wedding/pw-04-golden-hour.jpg" alt="Olayemi embracing Emmanuel from behind while he sits">
+            <figcaption>Close Embrace</figcaption>
+          </figure>
+          <figure class="gallery-photo">
+            <img src="assets/pre-wedding/pw-07-just-the-two-of-us.jpg" alt="Close-up of Olayemi and Emmanuel in elegant wedding-style attire">
+            <figcaption>Elegant Details</figcaption>
+          </figure>
+          <figure class="gallery-photo">
+            <img src="assets/pre-wedding/pw-05-cultural-pride.jpg" alt="Close-up portrait of Olayemi and Emmanuel in traditional Ankara attire">
+            <figcaption>Rooted in Culture</figcaption>
+          </figure>
+          <figure class="gallery-photo">
+            <img src="assets/pre-wedding/pw-06-forever-begins.jpg" alt="Olayemi in a white dress and Emmanuel in a black suit, seated together">
+            <figcaption>Modern Romance</figcaption>
+          </figure>
         </div>
       </section>
-      <section class="dress-code-section" id="dress-code-section" aria-labelledby="dress-code-title">
-        <div class="dress-code__card">
-          <span class="dress-code__eyebrow">Celebration style</span>
-          <h2 id="dress-code-title">Dress Code</h2>
-          <span class="dress-code__divider" aria-hidden="true"></span>
-          <p>We'd love to see you in elegant evening attire that complements our celebration's color palette.</p>
-          <div class="dress-code__palette" aria-label="Celebration color palette">
-            <!-- Placeholder palette: for the final dress code, update only the --swatch values -->
-            <i style="--swatch:#f7f3e8" title="Ivory"></i>
-            <i style="--swatch:#d7e5d2" title="Pale Sage"></i>
-            <i style="--swatch:#a8c9b8" title="Sage Green"></i>
-            <i style="--swatch:#5f9d82" title="Sea Green"></i>
-            <i style="--swatch:#2f5b4c" title="Deep Sea Green"></i>
-          </div>
-          <small>Evening attire · calm, refined tones</small>
+      <section class="gallery-page" id="gallery-proposal" aria-labelledby="gallery-proposal-title">
+        <button type="button" class="gallery-page__back" data-gallery-close>&larr; Back to gallery</button>
+        <span class="gallery-page__eyebrow">Our Gallery</span>
+        <h2 id="gallery-proposal-title">Proposal</h2>
+        <p class="gallery-page__intro">Photos from the proposal will appear here soon.</p>
+        <div class="gallery-page__grid">
+          <span class="gallery-placeholder" aria-hidden="true"><i></i><small>The Setup</small></span>
+          <span class="gallery-placeholder" aria-hidden="true"><i></i><small>The Question</small></span>
+          <span class="gallery-placeholder" aria-hidden="true"><i></i><small>She Said Yes</small></span>
+          <span class="gallery-placeholder" aria-hidden="true"><i></i><small>Ring Reveal</small></span>
+          <span class="gallery-placeholder" aria-hidden="true"><i></i><small>Celebration</small></span>
+          <span class="gallery-placeholder" aria-hidden="true"><i></i><small>Family &amp; Friends</small></span>
         </div>
-        <span class="dress-code__fabric dress-code__fabric--left" aria-hidden="true"></span>
-        <span class="dress-code__fabric dress-code__fabric--right" aria-hidden="true"></span>
       </section>
       <section class="trivia-section" id="trivia-section" aria-labelledby="trivia-title">
         <span class="trivia-section__eyebrow">How well do you know the couple?</span>
         <h2 id="trivia-title">Couple's Trivia</h2>
         <p class="trivia-section__intro">Answer each question to reveal the next — see how well you really know Olayemi &amp; Emmanuel!</p>
         <div class="trivia-progress" aria-hidden="true"><span></span></div>
-        <!-- Placeholder trivia: swap the option text and move data-correct to the real answer for each question -->
+        <!-- Real trivia answers provided by the couple -->
         <ol class="trivia-list">
           <li class="trivia-question is-active" data-index="1">
-            <span class="trivia-question__number">Question 1 of 10</span>
-            <h3>Where did Olayemi and Emmanuel first meet?</h3>
+            <span class="trivia-question__number">Question 1 of 12</span>
+            <h3>Where did Olayemi and Emmanuel meet?</h3>
             <div class="trivia-options">
               <button type="button">University</button>
-              <button type="button" data-correct="true">Through mutual friends</button>
-              <button type="button">At work</button>
+              <button type="button" data-correct="true">Olayemi's workplace</button>
+              <button type="button">Through mutual friends</button>
               <button type="button">At church</button>
             </div>
           </li>
           <li class="trivia-question is-hidden" data-index="2">
-            <span class="trivia-question__number">Question 2 of 10</span>
+            <span class="trivia-question__number">Question 2 of 12</span>
             <h3>Where was their first date?</h3>
             <div class="trivia-options">
-              <button type="button" data-correct="true">Dinner date</button>
+              <button type="button">A restaurant</button>
+              <button type="button" data-correct="true">The park</button>
               <button type="button">The movies</button>
               <button type="button">A coffee shop</button>
-              <button type="button">A picnic</button>
             </div>
           </li>
           <li class="trivia-question is-hidden" data-index="3">
-            <span class="trivia-question__number">Question 3 of 10</span>
+            <span class="trivia-question__number">Question 3 of 12</span>
             <h3>Who said "I love you" first?</h3>
             <div class="trivia-options">
               <button type="button">Olayemi</button>
@@ -190,38 +347,38 @@
             </div>
           </li>
           <li class="trivia-question is-hidden" data-index="4">
-            <span class="trivia-question__number">Question 4 of 10</span>
+            <span class="trivia-question__number">Question 4 of 12</span>
             <h3>How long did they date before getting engaged?</h3>
             <div class="trivia-options">
               <button type="button">Less than a year</button>
-              <button type="button" data-correct="true">1–2 years</button>
-              <button type="button">2–3 years</button>
-              <button type="button">More than 3 years</button>
+              <button type="button" data-correct="true">2 years</button>
+              <button type="button">3 years</button>
+              <button type="button">More than 4 years</button>
             </div>
           </li>
           <li class="trivia-question is-hidden" data-index="5">
-            <span class="trivia-question__number">Question 5 of 10</span>
+            <span class="trivia-question__number">Question 5 of 12</span>
             <h3>Where did the proposal happen?</h3>
             <div class="trivia-options">
               <button type="button">At home</button>
-              <button type="button">At a restaurant</button>
-              <button type="button" data-correct="true">On a trip together</button>
+              <button type="button" data-correct="true">At a restaurant</button>
+              <button type="button">On a trip together</button>
               <button type="button">At a family gathering</button>
             </div>
           </li>
           <li class="trivia-question is-hidden" data-index="6">
-            <span class="trivia-question__number">Question 6 of 10</span>
-            <h3>What's Olayemi's favorite hobby?</h3>
+            <span class="trivia-question__number">Question 6 of 12</span>
+            <h3>What's Olayemi's hobby?</h3>
             <div class="trivia-options">
-              <button type="button" data-correct="true">Cooking</button>
+              <button type="button">Cooking</button>
               <button type="button">Reading</button>
+              <button type="button" data-correct="true">Watching movies</button>
               <button type="button">Dancing</button>
-              <button type="button">Traveling</button>
             </div>
           </li>
           <li class="trivia-question is-hidden" data-index="7">
-            <span class="trivia-question__number">Question 7 of 10</span>
-            <h3>What's Emmanuel's favorite hobby?</h3>
+            <span class="trivia-question__number">Question 7 of 12</span>
+            <h3>What's Emmanuel's hobby?</h3>
             <div class="trivia-options">
               <button type="button">Music</button>
               <button type="button" data-correct="true">Football</button>
@@ -230,63 +387,66 @@
             </div>
           </li>
           <li class="trivia-question is-hidden" data-index="8">
-            <span class="trivia-question__number">Question 8 of 10</span>
-            <h3>What do they love doing together most?</h3>
+            <span class="trivia-question__number">Question 8 of 12</span>
+            <h3>What do they enjoy doing together most?</h3>
             <div class="trivia-options">
-              <button type="button">Watching movies</button>
-              <button type="button" data-correct="true">Traveling</button>
+              <button type="button" data-correct="true">Watching movies</button>
+              <button type="button">Traveling</button>
               <button type="button">Cooking together</button>
               <button type="button">Praying together</button>
             </div>
           </li>
           <li class="trivia-question is-hidden" data-index="9">
-            <span class="trivia-question__number">Question 9 of 10</span>
+            <span class="trivia-question__number">Question 9 of 12</span>
             <h3>What's the couple's wedding color theme?</h3>
             <div class="trivia-options">
-              <button type="button" data-correct="true">Ivory &amp; Sea Green</button>
-              <button type="button">Blush &amp; Gold</button>
+              <button type="button" data-correct="true">Peach, Blush Pink &amp; Emerald Green</button>
+              <button type="button">Ivory &amp; Sea Green</button>
               <button type="button">Navy &amp; Silver</button>
               <button type="button">Burgundy &amp; Cream</button>
             </div>
           </li>
           <li class="trivia-question is-hidden" data-index="10">
-            <span class="trivia-question__number">Question 10 of 10</span>
-            <h3>Where will the wedding take place?</h3>
+            <span class="trivia-question__number">Question 10 of 12</span>
+            <h3>Who takes longer to get ready?</h3>
             <div class="trivia-options">
-              <button type="button" data-correct="true">ERKC Zhukovka</button>
-              <button type="button">A beach resort</button>
-              <button type="button">A garden venue</button>
-              <button type="button">A church hall</button>
+              <button type="button">Olayemi</button>
+              <button type="button" data-correct="true">Emmanuel</button>
+              <button type="button">Both equally</button>
+              <button type="button">Neither — they're always on time</button>
+            </div>
+          </li>
+          <li class="trivia-question is-hidden" data-index="11">
+            <span class="trivia-question__number">Question 11 of 12</span>
+            <h3>What's Emmanuel's favorite genre of music?</h3>
+            <div class="trivia-options">
+              <button type="button">Afrobeats</button>
+              <button type="button">Hip-hop</button>
+              <button type="button" data-correct="true">Country music</button>
+              <button type="button">Gospel</button>
+            </div>
+          </li>
+          <li class="trivia-question is-hidden" data-index="12">
+            <span class="trivia-question__number">Question 12 of 12</span>
+            <h3>What's Olayemi's favorite genre of music?</h3>
+            <div class="trivia-options">
+              <button type="button">Afrobeats</button>
+              <button type="button">R&amp;B</button>
+              <button type="button">Pop</button>
+              <button type="button" data-correct="true">Oldies</button>
             </div>
           </li>
         </ol>
         <div class="trivia-result" hidden>
           <span class="trivia-result__check" aria-hidden="true"><i></i></span>
           <h3>You finished the trivia!</h3>
-          <p>You scored <b>0</b> out of 10 — thank you for playing along with us.</p>
-        </div>
-      </section>
-      <section class="location-section" id="location-section" aria-labelledby="location-title">
-        <div class="location-card">
-          <span class="location-card__eyebrow">Venue</span>
-          <h2 id="location-title">Location</h2>
-          <span class="location-pin" aria-hidden="true"><i></i></span>
-          <p>Our wedding will take place at</p>
-          <address>ERKC Zhukovka</address>
-          <figure class="location-photo">
-            <img src="assets/zhukovka-location.png" alt="ERKC Zhukovka nestled in a pine forest">
-            <a href="https://yandex.ru/maps/?text=%D0%95%D0%A0%D0%9A%D0%A6%20%D0%96%D1%83%D0%BA%D0%BE%D0%B2%D0%BA%D0%B0"
-              target="_blank" rel="noopener noreferrer" aria-label="Open ERKC Zhukovka in Yandex Maps">
-              <i aria-hidden="true"></i>
-              <span>Open in Yandex Maps</span>
-            </a>
-          </figure>
+          <p>You scored <b>0</b> out of 12 — thank you for playing along with us.</p>
         </div>
       </section>
       <section class="guest-form-section" id="guest-form-section" aria-labelledby="guest-form-title">
         <div class="guest-form-card">
-          <h2 id="guest-form-title">Guest Form</h2>
-          <p class="guest-form-card__intro">Your answers will help us make this evening comfortable for everyone.</p>
+          <h2 id="guest-form-title">RSVP</h2>
+          <p class="guest-form-card__intro">Let us know if you're coming.</p>
 
           <form class="guest-form">
             <label class="guest-form__website" aria-hidden="true">
@@ -316,19 +476,6 @@
                 <span>Guest's name</span>
                 <input type="text" name="companionName" autocomplete="off" placeholder="Enter their name">
               </label>
-            </fieldset>
-
-            <fieldset>
-              <legend>What drinks do you prefer?</legend>
-              <small>You may select more than one option</small>
-              <div class="guest-form__options guest-form__options--drinks">
-                <label><input type="checkbox" name="drinks" value="whiteWine"><span>White wine</span></label>
-                <label><input type="checkbox" name="drinks" value="redWine"><span>Red wine</span></label>
-                <label><input type="checkbox" name="drinks" value="pomegranateWine"><span>Pomegranate wine</span></label>
-                <label><input type="checkbox" name="drinks" value="vodka"><span>Vodka</span></label>
-                <label><input type="checkbox" name="drinks" value="whiskey"><span>Whiskey</span></label>
-                <label><input type="checkbox" name="drinks" value="none"><span>I don't drink alcohol</span></label>
-              </div>
             </fieldset>
 
             <button class="guest-form__submit" type="submit">Submit response</button>
