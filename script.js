@@ -6,6 +6,33 @@ let revealTimer;
 scene.classList.remove('is-open');
 document.body.classList.remove('show-invitation');
 
+const bgMusic = document.getElementById('bg-music');
+const musicToggle = document.getElementById('music-toggle');
+
+const setMusicToggleState = (isPlaying) => {
+  musicToggle.classList.toggle('is-playing', isPlaying);
+  musicToggle.setAttribute('aria-label', isPlaying ? 'Pause music' : 'Play music');
+};
+
+const playMusic = () => {
+  bgMusic.play()
+    .then(() => setMusicToggleState(true))
+    .catch(() => setMusicToggleState(false));
+};
+
+const pauseMusic = () => {
+  bgMusic.pause();
+  setMusicToggleState(false);
+};
+
+musicToggle.addEventListener('click', () => {
+  if (bgMusic.paused) {
+    playMusic();
+  } else {
+    pauseMusic();
+  }
+});
+
 const birdPaths = [
   [-46,-34],[-34,-54],[-18,-62],[5,-58],[24,-49],[44,-31],
   [-55,-12],[-42,7],[-30,31],[-12,48],[10,54],[31,38],[51,17],
@@ -34,6 +61,8 @@ const startReveal = () => {
 const openEnvelope = () => {
   if (scene.classList.contains('is-open')) return;
   scene.classList.add('is-open');
+  musicToggle.hidden = false;
+  playMusic();
   window.clearTimeout(revealTimer);
   revealTimer = window.setTimeout(startReveal, 1500);
 };
@@ -183,6 +212,34 @@ const calendarObserver = new IntersectionObserver(([entry]) => {
 }, { threshold: 0.2 });
 calendarObserver.observe(calendarSection);
 
+const loveStorySection = document.querySelector('.love-story-section');
+const loveStoryObserver = new IntersectionObserver(([entry]) => {
+  if (entry.isIntersecting) {
+    loveStorySection.classList.add('is-visible');
+    loveStoryObserver.disconnect();
+  }
+}, { threshold: 0.2 });
+loveStoryObserver.observe(loveStorySection);
+
+document.querySelectorAll('.love-story-tabs').forEach((tabGroup) => {
+  const tabs = [...tabGroup.querySelectorAll('.love-story-tab')];
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      if (tab.classList.contains('is-active')) return;
+      const panel = document.getElementById(tab.getAttribute('aria-controls'));
+      tabs.forEach((otherTab) => {
+        const isThis = otherTab === tab;
+        otherTab.classList.toggle('is-active', isThis);
+        otherTab.setAttribute('aria-selected', String(isThis));
+        const otherPanel = document.getElementById(otherTab.getAttribute('aria-controls'));
+        otherPanel.classList.toggle('is-active', isThis);
+        otherPanel.hidden = !isThis;
+      });
+      panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    });
+  });
+});
+
 const gallerySection = document.querySelector('.gallery-section');
 const galleryObserver = new IntersectionObserver(([entry]) => {
   if (entry.isIntersecting) {
@@ -191,6 +248,80 @@ const galleryObserver = new IntersectionObserver(([entry]) => {
   }
 }, { threshold: 0.2 });
 galleryObserver.observe(gallerySection);
+
+let activeGalleryPage = null;
+let galleryHideTimer;
+
+const openGalleryPage = (id) => {
+  const page = document.getElementById(id);
+  if (!page) return;
+  window.clearTimeout(galleryHideTimer);
+  activeGalleryPage = page;
+  page.hidden = false;
+  requestAnimationFrame(() => page.classList.add('is-open'));
+  page.scrollTop = 0;
+  document.body.classList.add('gallery-lock');
+};
+
+const closeGalleryPage = () => {
+  if (!activeGalleryPage) return;
+  const page = activeGalleryPage;
+  page.classList.remove('is-open');
+  activeGalleryPage = null;
+  if (lightbox.hidden) document.body.classList.remove('gallery-lock');
+  window.clearTimeout(galleryHideTimer);
+  galleryHideTimer = window.setTimeout(() => { page.hidden = true; }, 400);
+};
+
+document.querySelectorAll('[data-gallery-open]').forEach((link) => {
+  link.addEventListener('click', (event) => {
+    event.preventDefault();
+    openGalleryPage(link.dataset.galleryOpen);
+  });
+});
+
+document.querySelectorAll('[data-gallery-close]').forEach((button) => {
+  button.addEventListener('click', closeGalleryPage);
+});
+
+const lightbox = document.getElementById('lightbox');
+const lightboxImage = document.getElementById('lightbox-image');
+const lightboxDownload = document.getElementById('lightbox-download');
+const lightboxClose = document.getElementById('lightbox-close');
+
+const openLightbox = (img) => {
+  lightboxImage.src = img.currentSrc || img.src;
+  lightboxImage.alt = img.alt || '';
+  lightboxDownload.href = img.src;
+  lightboxDownload.setAttribute('download', img.src.split('/').pop() || 'photo.jpg');
+  lightbox.hidden = false;
+  requestAnimationFrame(() => lightbox.classList.add('is-open'));
+  document.body.classList.add('gallery-lock');
+};
+
+const closeLightbox = () => {
+  lightbox.classList.remove('is-open');
+  if (!activeGalleryPage) document.body.classList.remove('gallery-lock');
+  window.setTimeout(() => { lightbox.hidden = true; }, 250);
+};
+
+document.querySelectorAll('.gallery-photo img').forEach((img) => {
+  img.addEventListener('click', () => openLightbox(img));
+});
+
+lightboxClose.addEventListener('click', closeLightbox);
+lightbox.addEventListener('click', (event) => {
+  if (event.target === lightbox) closeLightbox();
+});
+
+window.addEventListener('keydown', (event) => {
+  if (event.key !== 'Escape') return;
+  if (!lightbox.hidden) {
+    closeLightbox();
+  } else {
+    closeGalleryPage();
+  }
+});
 
 revealPage.addEventListener('scroll', requestCalendarHeartProgress, { passive: true });
 window.addEventListener('resize', requestCalendarHeartProgress);
@@ -264,15 +395,6 @@ triviaQuestions.forEach((question, index) => {
   });
 });
 
-const locationSection = document.querySelector('.location-section');
-const locationObserver = new IntersectionObserver(([entry]) => {
-  if (entry.isIntersecting) {
-    locationSection.classList.add('is-visible');
-    locationObserver.disconnect();
-  }
-}, { threshold: 0.2 });
-locationObserver.observe(locationSection);
-
 const guestFormSection = document.querySelector('.guest-form-section');
 const guestFormObserver = new IntersectionObserver(([entry]) => {
   if (entry.isIntersecting) {
@@ -295,8 +417,6 @@ const guestForm = document.querySelector('.guest-form');
 const companionField = guestForm.querySelector('.guest-companion');
 const companionInput = companionField.querySelector('input');
 const companyInputs = guestForm.querySelectorAll('input[name="company"]');
-const drinkInputs = guestForm.querySelectorAll('input[name="drinks"]');
-const noAlcoholInput = guestForm.querySelector('input[name="drinks"][value="none"]');
 const formStatus = guestForm.querySelector('.guest-form__status');
 const guestSubmitButton = guestForm.querySelector('.guest-form__submit');
 const guestSuccess = guestForm.querySelector('.guest-form__success');
@@ -311,15 +431,9 @@ companyInputs.forEach((input) => {
   });
 });
 
-drinkInputs.forEach((input) => {
-  input.addEventListener('change', () => {
-    if (input === noAlcoholInput && input.checked) {
-      drinkInputs.forEach((drink) => { if (drink !== noAlcoholInput) drink.checked = false; });
-    } else if (input.checked) {
-      noAlcoholInput.checked = false;
-    }
-  });
-});
+// Paste the deployed Google Apps Script Web App URL here (ends in /exec).
+// See the setup steps shared alongside this file for how to create it.
+const GOOGLE_SHEETS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxMpjxzD6eD0r-_EZVZNkmM1NDV4-Brs6E3R0V44TpFszbu2UsKDS0GXqOFJjXGpntZ/exec';
 
 guestForm.addEventListener('submit', async (event) => {
   event.preventDefault();
@@ -331,7 +445,6 @@ guestForm.addEventListener('submit', async (event) => {
     attendance: formData.get('attendance'),
     company: formData.get('company'),
     companionName: formData.get('companionName') || '',
-    drinks: formData.getAll('drinks'),
     website: formData.get('website') || '',
     submittedAt: new Date().toISOString()
   };
@@ -343,24 +456,33 @@ guestForm.addEventListener('submit', async (event) => {
   guestForm.classList.remove('is-submitted', 'has-error');
 
   try {
-    const serverResponse = await fetch('api/guest-response.php', {
+    if (GOOGLE_SHEETS_ENDPOINT.startsWith('PASTE_')) {
+      throw new Error('The RSVP form isn\'t connected to Google Sheets yet.');
+    }
+    if (response.website) {
+      // Honeypot field was filled in by a bot — silently pretend success.
+      throw { silent: true };
+    }
+
+    // Apps Script Web Apps don't reliably support CORS preflight requests,
+    // so we send as text/plain (no preflight) and can't read the response body.
+    // A resolved fetch (no network error) is treated as a successful submission.
+    await fetch(GOOGLE_SHEETS_ENDPOINT, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
       body: JSON.stringify(response)
     });
-    const result = await serverResponse.json().catch(() => ({}));
-
-    if (!serverResponse.ok || !result.ok) {
-      throw new Error(result.message || 'The server could not save your response.');
-    }
 
     localStorage.setItem('olayemiEmmanuelGuestResponse', JSON.stringify(response));
     guestSuccessName.textContent = response.guestName.trim().split(/\s+/)[0];
     guestSuccess.setAttribute('aria-hidden', 'false');
     guestForm.classList.add('is-submitted');
   } catch (error) {
-    formStatus.textContent = error.message || 'Could not submit your response. Please try again.';
-    guestForm.classList.add('has-error');
+    if (!error || !error.silent) {
+      formStatus.textContent = (error && error.message) || 'Could not submit your response. Please try again.';
+      guestForm.classList.add('has-error');
+    }
   } finally {
     guestSubmitButton.disabled = false;
     guestSubmitButton.textContent = 'Submit response';

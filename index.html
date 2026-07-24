@@ -19,6 +19,14 @@
   <button class="music-toggle" id="music-toggle" type="button" aria-label="Play music" hidden>
     <span class="music-toggle__icon" aria-hidden="true"></span>
   </button>
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo preview" hidden>
+    <button type="button" class="lightbox__close" id="lightbox-close" aria-label="Close preview">&times;</button>
+    <img class="lightbox__image" id="lightbox-image" src="" alt="">
+    <a class="lightbox__download" id="lightbox-download" href="" download>
+      <i aria-hidden="true"></i>
+      <span>Download photo</span>
+    </a>
+  </div>
   <main class="hero">
     <div class="grain" aria-hidden="true"></div>
     <section class="reveal-page" aria-label="Wedding invitation">
@@ -55,49 +63,29 @@
         </p>
         <p>We truly hope that on this day<br>the people dearest to us will be right there with us!</p>
       </section>
-      <section class="date-location-section" id="date-location-section">
-        <span class="date-location-section__eyebrow">Save the Date &amp; Find Us</span>
-        <div class="calendar-section" id="calendar-section">
-          <img class="calendar-flowers" src="assets/calendar-flowers.png" alt="" aria-hidden="true">
-          <!-- <span class="calendar-section__eyebrow">Save the date</span> -->
-          <h2>August</h2>
-          <div class="calendar" aria-label="August 2026 calendar">
-            <div class="calendar__week">
-              <span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span><span>Su</span>
-            </div>
-            <div class="calendar__days">
-              <i></i><i></i><i></i><i></i><i></i><span>1</span><span>2</span>
-              <span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span>
-              <span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span
-                class="wedding-day">15</span><span>16</span>
-              <span>17</span><span>18</span><span>19</span><span>20</span><span>21</span><span>22</span><span>23</span>
-              <span>24</span><span>25</span><span>26</span><span>27</span><span>28</span><span>29</span><span>30</span>
-              <span>31</span>
-              <svg class="calendar-heart" viewBox="0 0 64 58" aria-hidden="true">
-                <path pathLength="1" d="M32 53C27 47 8 35 8 20C8 10 14 5 22 5C27 5 30 8 32 12C34 8 37 5 42 5C50 5 56 10 56 20C56 35 37 47 32 53Z"></path>
-              </svg>
-            </div>
+      <section class="calendar-section" id="calendar-section">
+        <img class="calendar-flowers" src="assets/calendar-flowers.png" alt="" aria-hidden="true">
+        <!-- <span class="calendar-section__eyebrow">Save the date</span> -->
+        <h2>August</h2>
+        <div class="calendar" aria-label="August 2026 calendar">
+          <div class="calendar__week">
+            <span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span><span>Su</span>
           </div>
-          <button class="save-date" type="button"><b>＋</b> Add to calendar</button>
-          <!-- <small>15 August 2026 · all day</small> -->
-        </div>
-        <div class="location-section" id="location-section" aria-labelledby="location-title">
-          <div class="location-card">
-            <span class="location-card__eyebrow">Venue</span>
-            <h2 id="location-title">Location</h2>
-            <span class="location-pin" aria-hidden="true"><i></i></span>
-            <p>Our wedding will take place at</p>
-            <address>ERKC Zhukovka</address>
-            <figure class="location-photo">
-              <img src="assets/zhukovka-location.png" alt="ERKC Zhukovka nestled in a pine forest">
-              <a href="https://yandex.ru/maps/?text=%D0%95%D0%A0%D0%9A%D0%A6%20%D0%96%D1%83%D0%BA%D0%BE%D0%B2%D0%BA%D0%B0"
-                target="_blank" rel="noopener noreferrer" aria-label="Open ERKC Zhukovka in Yandex Maps">
-                <i aria-hidden="true"></i>
-                <span>Open in Yandex Maps</span>
-              </a>
-            </figure>
+          <div class="calendar__days">
+            <i></i><i></i><i></i><i></i><i></i><span>1</span><span>2</span>
+            <span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span>
+            <span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span
+              class="wedding-day">15</span><span>16</span>
+            <span>17</span><span>18</span><span>19</span><span>20</span><span>21</span><span>22</span><span>23</span>
+            <span>24</span><span>25</span><span>26</span><span>27</span><span>28</span><span>29</span><span>30</span>
+            <span>31</span>
+            <svg class="calendar-heart" viewBox="0 0 64 58" aria-hidden="true">
+              <path pathLength="1" d="M32 53C27 47 8 35 8 20C8 10 14 5 22 5C27 5 30 8 32 12C34 8 37 5 42 5C50 5 56 10 56 20C56 35 37 47 32 53Z"></path>
+            </svg>
           </div>
         </div>
+        <button class="save-date" type="button"><b>＋</b> Add to calendar</button>
+        <!-- <small>15 August 2026 · all day</small> -->
       </section>
       <section class="dress-code-section" id="dress-code-section" aria-labelledby="dress-code-title">
         <div class="dress-code__card">
@@ -204,7 +192,7 @@
           </a>
           <a class="gallery-card" href="#gallery-proposal" data-gallery-open="gallery-proposal">
             <span class="gallery-card__frame">
-              <img src="assets/heart-seal-3d.png" alt="" aria-hidden="true">
+              <img src="assets/proposal/prop-01-ring-reveal.jpg" alt="" aria-hidden="true">
               <span class="gallery-card__overlay"></span>
               <span class="gallery-card__icon" aria-hidden="true"></span>
             </span>
@@ -215,7 +203,7 @@
           </a>
         </div>
       </section>
-      <section class="gallery-page" id="gallery-love-journey" aria-labelledby="gallery-love-journey-title">
+      <section class="gallery-page" id="gallery-love-journey" hidden aria-labelledby="gallery-love-journey-title">
         <button type="button" class="gallery-page__back" data-gallery-close>&larr; Back to gallery</button>
         <span class="gallery-page__eyebrow">Our Gallery</span>
         <h2 id="gallery-love-journey-title">Love Journey</h2>
@@ -255,7 +243,7 @@
           </figure>
         </div>
       </section>
-      <section class="gallery-page" id="gallery-pre-wedding" aria-labelledby="gallery-pre-wedding-title">
+      <section class="gallery-page" id="gallery-pre-wedding" hidden aria-labelledby="gallery-pre-wedding-title">
         <button type="button" class="gallery-page__back" data-gallery-close>&larr; Back to gallery</button>
         <span class="gallery-page__eyebrow">Our Gallery</span>
         <h2 id="gallery-pre-wedding-title">Pre-Wedding</h2>
@@ -295,18 +283,21 @@
           </figure>
         </div>
       </section>
-      <section class="gallery-page" id="gallery-proposal" aria-labelledby="gallery-proposal-title">
+      <section class="gallery-page" id="gallery-proposal" hidden aria-labelledby="gallery-proposal-title">
         <button type="button" class="gallery-page__back" data-gallery-close>&larr; Back to gallery</button>
         <span class="gallery-page__eyebrow">Our Gallery</span>
         <h2 id="gallery-proposal-title">Proposal</h2>
-        <p class="gallery-page__intro">Photos from the proposal will appear here soon.</p>
+        <p class="gallery-page__intro">A few favorite moments from the proposal.</p>
         <div class="gallery-page__grid">
-          <span class="gallery-placeholder" aria-hidden="true"><i></i><small>The Setup</small></span>
-          <span class="gallery-placeholder" aria-hidden="true"><i></i><small>The Question</small></span>
-          <span class="gallery-placeholder" aria-hidden="true"><i></i><small>She Said Yes</small></span>
-          <span class="gallery-placeholder" aria-hidden="true"><i></i><small>Ring Reveal</small></span>
-          <span class="gallery-placeholder" aria-hidden="true"><i></i><small>Celebration</small></span>
-          <span class="gallery-placeholder" aria-hidden="true"><i></i><small>Family &amp; Friends</small></span>
+          <figure class="gallery-photo">
+            <img src="assets/proposal/prop-03-the-question.jpg" alt="Emmanuel proposing to Olayemi at a poolside dinner table">
+          </figure>
+          <figure class="gallery-photo">
+            <img src="assets/proposal/prop-01-ring-reveal.jpg" alt="Olayemi smiling and showing off her engagement ring">
+          </figure>
+          <figure class="gallery-photo">
+            <img src="assets/proposal/prop-02-celebration.jpg" alt="Olayemi and Emmanuel celebrating together after the proposal">
+          </figure>
         </div>
       </section>
       <section class="trivia-section" id="trivia-section" aria-labelledby="trivia-title">

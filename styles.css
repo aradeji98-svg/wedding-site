@@ -4904,3 +4904,490 @@ button {
     grid-template-columns: 1fr;
   }
 }
+
+/* Gallery albums open as full-screen overlays, not inline scroll sections */
+.gallery-page {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  min-height: 100svh;
+  overflow-y: auto;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity .4s ease, visibility 0s .4s;
+}
+
+.gallery-page.is-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition: opacity .4s ease, visibility 0s 0s;
+}
+
+.gallery-page__back {
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.gallery-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.gallery-placeholder small {
+  color: #56907e;
+  font: 600 9px/1.3 Manrope, sans-serif;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 0 6px;
+}
+
+.gallery-placeholder i {
+  position: relative;
+  flex-shrink: 0;
+  transform: none;
+}
+
+body.gallery-lock {
+  overflow: hidden;
+}
+
+/* Real photo tiles inside opened gallery albums */
+.gallery-photo {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+}
+
+.gallery-photo img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 3/4;
+  object-fit: cover;
+  border-radius: 14px;
+  border: 1px solid rgba(84, 139, 123, .22);
+  box-shadow: 0 10px 22px rgba(44, 82, 71, .16);
+}
+
+.gallery-photo figcaption {
+  color: #477668;
+  font: 600 9px/1.3 Manrope, sans-serif;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+/* Merged Save the Date + Location page */
+.date-location-section {
+  position: relative;
+  z-index: 8;
+  min-height: 100svh;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(20px, 4vw, 48px);
+  padding: 76px 24px 60px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 38%, rgba(255, 255, 255, .8), transparent 38%),
+    linear-gradient(150deg, #fbfaf7 0%, #eeeae1 48%, #e4dbc6 100%);
+}
+
+.date-location-section__eyebrow {
+  flex-basis: 100%;
+  margin-bottom: -8px;
+  color: #56907e;
+  font: 600 9px/1 Manrope, sans-serif;
+  letter-spacing: .32em;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.date-location-section .calendar-section,
+.date-location-section .location-section {
+  min-height: auto;
+  flex: 1 1 380px;
+  max-width: 460px;
+  padding: 0;
+  background: none;
+}
+
+.date-location-section .location-section {
+  display: block;
+  place-items: unset;
+}
+
+.date-location-section .location-section::before {
+  display: none;
+}
+
+.date-location-section .location-card {
+  width: 100%;
+}
+
+@media (max-width: 900px) {
+  .date-location-section {
+    padding-top: 60px;
+  }
+}
+
+/* Our Love Story section (content to follow) */
+.love-story-section {
+  position: relative;
+  z-index: 8;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 72px 24px;
+  text-align: center;
+  color: #5c584e;
+  background:
+    radial-gradient(circle at 50% 25%, rgba(255, 255, 255, .84), transparent 38%),
+    linear-gradient(155deg, #f8f5ed 0%, #eef4ec 52%, #f4f0e5 100%);
+  opacity: 0;
+  transform: translateY(48px);
+  transition: opacity 1s ease, transform 1.15s cubic-bezier(.2, .75, .2, 1);
+}
+
+.love-story-section.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.love-story-section__eyebrow {
+  color: #56907e;
+  font: 600 9px/1 Manrope, sans-serif;
+  letter-spacing: .32em;
+  text-transform: uppercase;
+}
+
+.love-story-section h2 {
+  margin: 13px 0 10px;
+  color: #477668;
+  font: italic 500 clamp(52px, 6vw, 82px)/.9 "Cormorant Garamond", Georgia, serif;
+}
+
+.love-story-section__intro {
+  max-width: 420px;
+  margin: 0;
+  color: #7c7566;
+  font: 400 15px/1.6 Manrope, sans-serif;
+}
+
+/* Our Love Story: topic + His/Her P.O.V. tabs */
+.love-story-topic {
+  width: min(92vw, 640px);
+  margin-top: 34px;
+}
+
+.love-story-topic__title {
+  margin: 0 0 22px;
+  color: #385e52;
+  font: 500 clamp(24px, 3vw, 30px)/1.2 "Cormorant Garamond", Georgia, serif;
+}
+
+.love-story-tabs {
+  display: inline-flex;
+  gap: 6px;
+  margin: 0 auto 28px;
+  padding: 5px;
+  border-radius: 999px;
+  background: rgba(84, 139, 123, .12);
+}
+
+.love-story-tab {
+  padding: 10px 22px;
+  border: none;
+  border-radius: 999px;
+  background: transparent;
+  color: #56907e;
+  font: 600 12px/1 Manrope, sans-serif;
+  letter-spacing: .04em;
+  cursor: pointer;
+  transition: background .3s ease, color .3s ease, box-shadow .3s ease;
+}
+
+.love-story-tab.is-active {
+  background: linear-gradient(135deg, #5fa688, #2f6a55);
+  color: #fff;
+  box-shadow: 0 8px 18px rgba(44, 82, 71, .25);
+}
+
+.love-story-panel {
+  display: none;
+  flex-direction: column;
+  gap: 16px;
+  text-align: left;
+  padding: clamp(24px, 4vw, 38px) clamp(22px, 4.5vw, 40px);
+  border-radius: 22px;
+  border: 1px solid rgba(84, 139, 123, .18);
+  background: rgba(255, 255, 255, .55);
+  box-shadow: 0 14px 32px rgba(44, 82, 71, .1), inset 0 1px rgba(255, 255, 255, .6);
+  animation: love-story-fade .5s ease;
+}
+
+.love-story-panel.is-active {
+  display: flex;
+}
+
+.love-story-panel p {
+  margin: 0;
+  color: #5c584e;
+  font: 400 15px/1.75 Manrope, sans-serif;
+}
+
+@keyframes love-story-fade {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 620px) {
+  .love-story-tabs {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .love-story-tab {
+    flex: 1;
+    padding: 10px 12px;
+  }
+}
+
+/* Hero couple photo now shows a real picture instead of the placeholder */
+.couple-photo {
+  pointer-events: auto;
+}
+
+.couple-photo__frame {
+  overflow: hidden;
+  border: 1.5px solid rgba(255, 255, 255, .55);
+  background: #eee;
+  box-shadow: 0 18px 40px rgba(44, 82, 71, .28), inset 0 1px rgba(255, 255, 255, .5);
+}
+
+.couple-photo__frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+  display: block;
+}
+
+/* Persistent background music play/pause toggle, visible across every page */
+.music-toggle {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 80;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  border: 1px solid rgba(84, 139, 123, .3);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .82);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 10px 24px rgba(44, 82, 71, .22);
+  cursor: pointer;
+  transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
+}
+
+.music-toggle:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 28px rgba(44, 82, 71, .28);
+}
+
+.music-toggle__icon {
+  position: relative;
+  width: 16px;
+  height: 16px;
+}
+
+/* Paused state: play triangle */
+.music-toggle__icon::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-style: solid;
+  border-width: 8px 0 8px 13px;
+  border-color: transparent transparent transparent #2f6a55;
+  transform: translateX(1px);
+}
+
+/* Playing state: pause bars */
+.music-toggle.is-playing .music-toggle__icon::before {
+  display: none;
+}
+
+.music-toggle__icon::after {
+  content: "";
+  display: none;
+  position: absolute;
+  inset: 0;
+  width: 4px;
+  height: 16px;
+  background: #2f6a55;
+  box-shadow: 7px 0 0 #2f6a55;
+  margin: 0 auto;
+}
+
+.music-toggle.is-playing .music-toggle__icon::after {
+  display: block;
+}
+
+.music-toggle:focus-visible {
+  outline: 2px solid #2f6a55;
+  outline-offset: 3px;
+}
+
+@media (max-width: 620px) {
+  .music-toggle {
+    right: 14px;
+    bottom: 14px;
+    width: 44px;
+    height: 44px;
+  }
+}
+
+/* Gallery photos: hint that they expand on click */
+.gallery-photo img {
+  cursor: zoom-in;
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+
+.gallery-photo img:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 28px rgba(44, 82, 71, .24);
+}
+
+/* Fullscreen lightbox for expanding + downloading any gallery photo */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  padding: 60px 20px;
+  background: rgba(20, 32, 28, .92);
+  opacity: 0;
+  transition: opacity .25s ease;
+}
+
+.lightbox.is-open {
+  opacity: 1;
+}
+
+.lightbox__image {
+  max-width: min(92vw, 720px);
+  max-height: 74svh;
+  border-radius: 10px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, .45);
+  object-fit: contain;
+}
+
+.lightbox__close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(255, 255, 255, .3);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .1);
+  color: #fff;
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+  transition: background .25s ease;
+}
+
+.lightbox__close:hover {
+  background: rgba(255, 255, 255, .22);
+}
+
+.lightbox__download {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 22px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #5fa688, #2f6a55);
+  color: #fff;
+  text-decoration: none;
+  font: 600 12px/1 Manrope, sans-serif;
+  letter-spacing: .04em;
+  box-shadow: 0 10px 22px rgba(0, 0, 0, .3);
+  transition: transform .2s ease;
+}
+
+.lightbox__download:hover {
+  transform: translateY(-2px);
+}
+
+.lightbox__download i {
+  position: relative;
+  width: 12px;
+  height: 12px;
+}
+
+.lightbox__download i::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 2px;
+  height: 8px;
+  background: #fff;
+  transform: translateX(-50%);
+}
+
+.lightbox__download i::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 8px;
+  height: 8px;
+  border-left: 2px solid #fff;
+  border-bottom: 2px solid #fff;
+  transform: translateX(-50%) rotate(-45deg);
+  transform-origin: center;
+}
+
+@media (max-width: 620px) {
+  .lightbox {
+    padding: 50px 16px;
+  }
+
+  .lightbox__close {
+    top: 14px;
+    right: 14px;
+  }
+}
